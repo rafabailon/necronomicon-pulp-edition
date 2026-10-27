@@ -1,0 +1,27 @@
+% English edition: edit story text here; shared typography lives in ../styles/pulp-book.sty.
+\documentclass[11pt,twoside,openany]{scrbook}
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\usepackage{pulp-book}
+\title{The Necronomicon Project: Pulp Edition}
+\author{A. M. Vale}
+\date{1928}
+\begin{document}
+\frontmatter
+\input{en/front-matter/cover}
+\input{en/front-matter/credits}
+\input{en/front-matter/contents}
+\mainmatter
+\input{en/chapters/01-gazette-dispatch}
+\input{en/chapters/02-gazette-correction}
+\input{en/chapters/03-story-chart}
+\input{en/chapters/04-story-cellar-door}
+\input{en/chapters/05-transcript-customs-house}
+\input{en/chapters/06-transcript-missing-minute}
+\input{en/chapters/07-field-notes-salt-book}
+\input{en/chapters/08-field-notes-next-watch}
+\input{en/chapters/09-appendix-unquiet-places}
+\input{en/chapters/10-appendix-readers-caution}
+\backmatter
+\input{en/back-matter/back-cover}
+\end{document}
