@@ -1,0 +1,106 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pulp-book}[2026/10/21 Shared pulp-book layout]
+
+\RequirePackage[a4paper,inner=30mm,outer=24mm,top=27mm,bottom=29mm,headheight=15pt]{geometry}
+\RequirePackage{fontspec}
+\RequirePackage{xcolor}
+\RequirePackage{fancyhdr}
+\RequirePackage{multicol}
+\RequirePackage{lettrine}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{tikz}
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}
+\RequirePackage{array}
+\RequirePackage{microtype}
+\RequirePackage{hyperref}
+
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+
+\definecolor{Ink}{HTML}{211C18}
+\definecolor{OldPaper}{HTML}{F1E5C8}
+\definecolor{Rust}{HTML}{9D321F}
+\definecolor{DeepSea}{HTML}{183B45}
+\definecolor{FadedGold}{HTML}{B6955B}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=Rust,
+  urlcolor=DeepSea,
+  pdftitle={The Necronomicon Project: Pulp Edition},
+  pdfauthor={A. M. Vale}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\small\textsc{\leftmark}}
+\fancyhead[RE,LO]{\small\textsc{Arkham Press \textbullet{} 1928}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{0.35em}
+\setlength{\columnsep}{22pt}
+\setlength{\columnseprule}{0.3pt}
+\raggedbottom
+
+\newtcolorbox{fieldnote}[1]{
+  enhanced,
+  breakable,
+  colback=OldPaper,
+  colframe=Rust,
+  coltitle=Ink,
+  fonttitle=\bfseries\scshape,
+  title={#1},
+  boxrule=0.8pt,
+  arc=1mm,
+  borderline west={2pt}{0pt}{FadedGold},
+  left=4mm,
+  right=4mm,
+  top=2mm,
+  bottom=2mm
+}
+
+\newcommand{\PulpCoverArt}[1]{%
+  \begin{tikzpicture}[x=1cm,y=1cm]
+    \fill[DeepSea] (0,0) rectangle (12,7.2);
+    \fill[Rust] (0,0) -- (12,0) -- (12,1.1) -- (0,2.0) -- cycle;
+    \draw[FadedGold,line width=2pt] (0.3,0.3) rectangle (11.7,6.9);
+    \draw[OldPaper,line width=1.3pt] (0.55,0.55) rectangle (11.45,6.65);
+    \fill[OldPaper] (6,3.5) circle (1.25);
+    \fill[DeepSea] (6,3.5) circle (0.96);
+    \foreach \a in {0,30,...,330} {
+      \draw[Rust,line width=2pt] (6,3.5) -- ++(\a:1.55);
+    }
+    \fill[Rust] (6,3.5) circle (0.38);
+    \draw[OldPaper,line width=1.2pt] (2.0,1.2) .. controls (3.0,2.5) and (4.0,1.1) .. (5.1,2.0);
+    \draw[OldPaper,line width=1.2pt] (6.9,2.0) .. controls (8.0,1.1) and (9.0,2.5) .. (10.0,1.2);
+    \node[OldPaper,font=\sffamily\bfseries\large] at (6,6.0) {ARKHAM PRESS};
+    \node[OldPaper,font=\sffamily\small] at (6,0.72) {#1};
+  \end{tikzpicture}%
+}
+
+\newcommand{\PulpBarcode}{%
+  \begin{tikzpicture}[x=0.055cm,y=0.055cm]
+    \foreach \x/\w in {0/2,4/1,7/3,13/1,17/2,22/1,26/4,33/1,37/2,42/1,46/3,52/1,56/2,61/1,65/4,72/1,76/2,81/1,85/3,91/1,95/2,100/1,104/4,111/1,115/2,120/1,124/3,130/1,134/2,139/1,143/4,150/1,154/2,159/1,163/3,169/1,173/2,178/1,182/4} {
+      \fill[Ink] (\x,0) rectangle ++(\w,22);
+    }
+    \node[font=\ttfamily\small,below] at (92,0) {0 1928 10427 6};
+  \end{tikzpicture}%
+}
+
+\newcommand{\ChapterPage}[2]{%
+  \clearpage
+  \thispagestyle{fancy}
+  \addcontentsline{toc}{chapter}{#2}
+  \begin{center}
+    {\large\textsc{#1}\par}
+    \vspace{0.4em}
+    {\color{Rust}\rule{0.45\linewidth}{0.8pt}\par}
+    \vspace{0.4em}
+    {\Large\bfseries #2\par}
+  \end{center}
+  \vspace{0.8em}
+}
